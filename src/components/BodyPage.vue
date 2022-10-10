@@ -1,7 +1,10 @@
 <template>
-  <a-table sticky :columns="columns" :data-source="this.data"  :scroll="{ x: 1500 }">
-    <template #bodyCell="{ column }">
-      <template v-if="column.key === 'operation'"><a>action</a></template>
+  <a-table sticky :columns="columns" :data-source="this.data" :scroll="{ x: 1500 }">
+    <template #bodyCell="{ column , text}">
+      <template v-if="column.key === 'operation'">
+        <a-button type="primary">Edit</a-button>
+        <a-button type="primary" danger @click="this.delete(text.id)">Delete</a-button>
+      </template>
     </template>
   </a-table>
 </template>
@@ -56,9 +59,8 @@ export default defineComponent({
     }]);
 
 
-
     return {
-      data:[],
+      data: [],
       columns,
     };
   },
@@ -75,6 +77,19 @@ export default defineComponent({
             console.log(error);
           });
     },
+    delete(id) {
+      axios.delete('http://localhost:8051/swagger-resources/svehicle/delete?id=' + id)
+          .then(
+              response => {
+                this.getAll();
+                console.log(response);
+              }
+          )
+          .catch(error => {
+            console.log(error);
+          });
+    },
+
   }
 
 });

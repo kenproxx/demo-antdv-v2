@@ -103,8 +103,7 @@ export default defineComponent({
 
       axios.post('http://localhost:8051/swagger-resources/svehicle/save', this.formState.vehicle)
           .then(
-            router.go("/")
-
+              router.go("/")
           )
           .catch(error => {
             console.log(error);

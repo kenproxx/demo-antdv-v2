@@ -1,6 +1,7 @@
 import {createRouter, createWebHistory} from 'vue-router'
 import InputForm from "./InputForm.vue";
 import BodyPage from "../components/BodyPage";
+
 const routes = [
     {
         path: '/add',
