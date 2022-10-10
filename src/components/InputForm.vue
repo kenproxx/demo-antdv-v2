@@ -6,21 +6,35 @@
       :validate-messages="validateMessages"
       @finish="onFinish"
   >
-    <a-form-item :name="['user', 'name']" label="Name" :rules="[{ required: true }]">
-      <a-input v-model:value="formState.user.name" />
+    <a-form-item :name="['vehicle', 'name']" label="Name" :rules="[{ required: true }]">
+      <a-input v-model:value="formState.vehicle.name" />
     </a-form-item>
-    <a-form-item :name="['user', 'email']" label="Email" :rules="[{ type: 'email' }]">
+    <a-form-item :name="['user', 'email']" label="Model" :rules="[{ type: 'email' }]">
       <a-input v-model:value="formState.user.email" />
     </a-form-item>
-    <a-form-item :name="['user', 'age']" label="Age" :rules="[{ type: 'number', min: 0, max: 99 }]">
+    <a-form-item :name="['user', 'age']" label="Price" :rules="[{ type: 'number', min: 0, max: 99 }]">
       <a-input-number v-model:value="formState.user.age" />
     </a-form-item>
-    <a-form-item :name="['user', 'website']" label="Website">
+    <a-form-item :name="['user', 'website']" label="Year">
       <a-input v-model:value="formState.user.website" />
     </a-form-item>
-    <a-form-item :name="['user', 'introduction']" label="Introduction">
+    <a-form-item :name="['user', 'introduction']" label="Type">
       <a-textarea v-model:value="formState.user.introduction" />
     </a-form-item>
+    <a-form-item :name="['user', 'introduction']" label="Nation">
+      <a-textarea v-model:value="formState.user.introduction" />
+    </a-form-item>
+    <a-form-item :name="['user', 'introduction']" label="Color">
+      <a-textarea v-model:value="formState.user.introduction" />
+    </a-form-item>
+    <a-form-item :name="['user', 'introduction']" label="Vehicle Code">
+      <a-textarea v-model:value="formState.user.introduction" />
+    </a-form-item>
+    <a-form-item :name="['user', 'introduction']" label="Amount">
+      <a-textarea v-model:value="formState.user.introduction" />
+    </a-form-item>
+
+
     <a-form-item :wrapper-col="{ ...layout.wrapperCol, offset: 8 }">
       <a-button type="primary" html-type="submit">Submit</a-button>
     </a-form-item>
@@ -55,6 +69,17 @@ export default defineComponent({
         email: '',
         website: '',
         introduction: '',
+      },
+      vehicle: {
+        name: '',
+        model: '',
+        price: '',
+        year: '',
+        type: '',
+        nation: '',
+        color: '',
+        vehicleCode: '',
+        amount: '',
       },
     });
 
