@@ -1,6 +1,6 @@
 <template>
 <HelloWorld></HelloWorld>
-  <router-view></router-view>
+<!--  <router-view></router-view>-->
 
 </template>
 
