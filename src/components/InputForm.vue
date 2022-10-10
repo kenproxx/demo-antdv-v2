@@ -70,17 +70,17 @@ export default defineComponent({
         website: '',
         introduction: '',
       },
-      vehicle: {
-        name: '',
-        model: '',
-        price: '',
-        year: '',
-        type: '',
-        nation: '',
-        color: '',
-        vehicleCode: '',
-        amount: '',
-      },
+      // vehicle: {
+      //   name: '',
+      //   model: '',
+      //   price: '',
+      //   year: '',
+      //   type: '',
+      //   nation: '',
+      //   color: '',
+      //   vehicleCode: '',
+      //   amount: '',
+      // },
     });
 
     const onFinish = values => {
