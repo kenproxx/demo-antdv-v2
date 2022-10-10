@@ -1,12 +1,22 @@
 <template>
   <a-table sticky :columns="columns" :data-source="this.data" :scroll="{ x: 1500 }">
     <template #bodyCell="{ column , text}">
+
+
+
       <template v-if="column.key === 'operation'">
-        <a-button type="primary">Edit</a-button>
+
+        <a-button type="primary"  @click="showModal">Edit</a-button>
         <a-button type="primary" danger @click="this.delete(text.id)">Delete</a-button>
       </template>
     </template>
   </a-table>
+
+  <a-modal v-model:visible="visible" title="Basic Modal" @ok="handleOk">
+    <p>Some contents...</p>
+    <p>Some contents...</p>
+    <p>Some contents...</p>
+  </a-modal>
 </template>
 <script>
 import {defineComponent, ref} from 'vue';
@@ -58,10 +68,24 @@ export default defineComponent({
       width: 100,
     }]);
 
+    const visible = ref(false);
 
+    const showModal = () => {
+      visible.value = true;
+    };
+
+    const handleOk = e => {
+      console.log(e);
+      visible.value = false;
+    };
     return {
       data: [],
       columns,
+      isEdit: false,
+      visible,
+      showModal,
+      handleOk,
+
     };
   },
   created() {
@@ -89,7 +113,9 @@ export default defineComponent({
             console.log(error);
           });
     },
-
+    enableEdit() {
+      this.isEdit =  !this.isEdit;
+    },
   }
 
 });
