@@ -9,6 +9,7 @@
 import {defineComponent, ref} from 'vue';
 import axios from "axios";
 
+
 export default defineComponent({
   data() {
     const columns = ref([{
@@ -63,39 +64,16 @@ export default defineComponent({
   },
   created() {
     this.getAll();
-    // this.addData();
   },
   methods: {
     getAll() {
       axios.get('http://localhost:8051/swagger-resources/svehicle/get-all')
           .then(response => {
             this.data = response.data;
-            console.log(this.data);
           })
           .catch(error => {
             console.log(error);
           });
-    },
-    addData() {
-      for (let i = 0; i < 100; i++) {
-        this.data.push({
-          key: i,
-          name: `Hi ${i}`,
-          model: (32 + i),
-          price: `${i}`,
-          year: `${i}`,
-          type: `${i}`,
-          nation: `${i}`,
-          amount: `${i}`,
-          createdDate: null,
-          createdUser: null,
-          rn: 0,
-          status: null,
-          updatedDate: null,
-          updatedUser: null
-
-        });
-      }
     },
   }
 

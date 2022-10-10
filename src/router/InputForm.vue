@@ -6,28 +6,44 @@
       :validate-messages="validateMessages"
       @finish="onFinish"
   >
-    <a-form-item :name="['user', 'name']" label="Name" :rules="[{ required: true }]">
-      <a-input v-model:value="formState.user.name" />
+    <a-form-item :name="['vehicle', 'name']" label="Name" :rules="[{ required: true }]">
+      <a-input v-model:value="formState.vehicle.name"/>
     </a-form-item>
-    <a-form-item :name="['user', 'email']" label="Email" :rules="[{ type: 'email' }]">
-      <a-input v-model:value="formState.user.email" />
+    <a-form-item :name="['vehicle', 'model']" label="model" :rules="[{ required: true  }]">
+      <a-input v-model:value="formState.vehicle.model"/>
     </a-form-item>
-    <a-form-item :name="['user', 'age']" label="Age" :rules="[{ type: 'number', min: 0, max: 99 }]">
-      <a-input-number v-model:value="formState.user.age" />
+    <a-form-item :name="['vehicle', 'price']" label="price" :rules="[{ type: 'number', required: true , min: 0 }]">
+      <a-input v-model:value="formState.vehicle.price"/>
     </a-form-item>
-    <a-form-item :name="['user', 'website']" label="Website">
-      <a-input v-model:value="formState.user.website" />
+    <a-form-item :name="['vehicle', 'year']" label="year" :rules="[{ type: 'number',required: true , min: 0}]">
+      <a-input v-model:value="formState.vehicle.year"/>
     </a-form-item>
-    <a-form-item :name="['user', 'introduction']" label="Introduction">
-      <a-textarea v-model:value="formState.user.introduction" />
+    <a-form-item :name="['vehicle', 'type']" label="type" :rules="[{ required: true }]">
+      <a-input v-model:value="formState.vehicle.type"/>
     </a-form-item>
+    <a-form-item :name="['vehicle', 'nation']" label="nation" :rules="[{ required: true }]">
+      <a-input v-model:value="formState.vehicle.nation"/>
+    </a-form-item>
+    <a-form-item :name="['vehicle', 'color']" label="color" :rules="[{ required: true }]">
+      <a-input v-model:value="formState.vehicle.color"/>
+    </a-form-item>
+    <a-form-item :name="['vehicle', 'vehicleCode']" label="vehicleCode" :rules="[{required: true }]">
+      <a-input v-model:value="formState.vehicle.vehicleCode"/>
+    </a-form-item>
+    <a-form-item :name="['vehicle', 'amount']" label="amount" :rules="[{ type: 'number', required: true, min: 0}]">
+      <a-input v-model:value="formState.vehicle.amount"/>
+    </a-form-item>
+
+
     <a-form-item :wrapper-col="{ ...layout.wrapperCol, offset: 8 }">
-      <a-button type="primary" html-type="submit">Submit</a-button>
+      <a-button type="primary" html-type="submit" @click="addVehicle">Submit</a-button>
     </a-form-item>
   </a-form>
 </template>
 <script>
-import { defineComponent, reactive } from 'vue';
+import {defineComponent, reactive} from 'vue';
+import axios from "axios";
+
 export default defineComponent({
   setup() {
     const layout = {
@@ -56,6 +72,17 @@ export default defineComponent({
         website: '',
         introduction: '',
       },
+      vehicle: {
+        name: '',
+        model: '',
+        price: '',
+        year: '',
+        type: '',
+        nation: '',
+        color: '',
+        vehicleCode: '',
+        amount: '',
+      }
     });
 
     const onFinish = values => {
@@ -69,6 +96,18 @@ export default defineComponent({
       validateMessages,
     };
   },
+  methods: {
+    addVehicle() {
+      axios.post('http://localhost:8051/swagger-resources/svehicle/save', this.formState.vehicle)
+          .then(response => {
+            console.log(response);
+
+          })
+          .catch(error => {
+            console.log(error);
+          });
+    }
+  }
 
 });
 </script>
