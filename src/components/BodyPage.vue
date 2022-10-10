@@ -10,7 +10,7 @@ import {defineComponent, ref} from 'vue';
 import axios from "axios";
 
 export default defineComponent({
-  setup() {
+  data() {
     const columns = ref([{
       title: 'Name',
       width: 100,
