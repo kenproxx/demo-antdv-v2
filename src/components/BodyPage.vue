@@ -1,5 +1,5 @@
 <template>
-  <a-table sticky :columns="columns" :data-source="this.data" :scroll="{ x: 1500 }">
+  <a-table sticky :columns="columns" :data-source="this.data"  :scroll="{ x: 1500 }">
     <template #bodyCell="{ column }">
       <template v-if="column.key === 'operation'"><a>action</a></template>
     </template>
@@ -55,25 +55,21 @@ export default defineComponent({
     }]);
 
 
+
     return {
-      data: [],
+      data:[],
       columns,
     };
   },
   created() {
     this.getAll();
-    this.addData();
-    // console.log(this.data);
-
+    // this.addData();
   },
   methods: {
     getAll() {
       axios.get('http://localhost:8051/swagger-resources/svehicle/get-all')
           .then(response => {
-            for (let i = 0; i < response.data.length; i++) {
-              this.data.push(response.data[i]);
-              // console.log(response.data[i]);
-            }
+            this.data = response.data;
             console.log(this.data);
           })
           .catch(error => {
@@ -81,13 +77,9 @@ export default defineComponent({
           });
     },
     addData() {
-      for (let i = 0; i < 15; i++) {
+      for (let i = 0; i < 100; i++) {
         this.data.push({
-          status: null,
-          createdDate: null,
-          createdUser: null,
-          updatedDate: null,
-          updatedUser: null,
+          key: i,
           name: `Hi ${i}`,
           model: (32 + i),
           price: `${i}`,
@@ -95,13 +87,15 @@ export default defineComponent({
           type: `${i}`,
           nation: `${i}`,
           amount: `${i}`,
-
+          createdDate: null,
+          createdUser: null,
           rn: 0,
-
+          status: null,
+          updatedDate: null,
+          updatedUser: null
 
         });
       }
-      // console.log(this.data);
     },
   }
 
