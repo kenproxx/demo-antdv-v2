@@ -9,28 +9,28 @@
     <a-form-item :name="['vehicle', 'name']" label="Name" :rules="[{ required: true }]">
       <a-input v-model:value="formState.vehicle.name"/>
     </a-form-item>
-    <a-form-item :name="['vehicle', 'model']" label="model" :rules="[{ required: true  }]">
+    <a-form-item :name="['vehicle', 'model']" label="Model" :rules="[{ required: true  }]">
       <a-input v-model:value="formState.vehicle.model"/>
     </a-form-item>
-    <a-form-item :name="['vehicle', 'price']" label="price" :rules="[{  required: true , min: 0 }]">
+    <a-form-item :name="['vehicle', 'price']" label="Price" :rules="[{  required: true , min: 1 }]">
       <a-input v-model:value="formState.vehicle.price"/>
     </a-form-item>
-    <a-form-item :name="['vehicle', 'year']" label="year" :rules="[{ required: true , min: 0}]">
+    <a-form-item :name="['vehicle', 'year']" label="Year" :rules="[{ required: true , min: 1}]">
       <a-input v-model:value="formState.vehicle.year"/>
     </a-form-item>
-    <a-form-item :name="['vehicle', 'type']" label="type" :rules="[{ required: true }]">
+    <a-form-item :name="['vehicle', 'type']" label="Type" :rules="[{ required: true }]">
       <a-input v-model:value="formState.vehicle.type"/>
     </a-form-item>
-    <a-form-item :name="['vehicle', 'nation']" label="nation" :rules="[{ required: true }]">
+    <a-form-item :name="['vehicle', 'nation']" label="Nation" :rules="[{ required: true }]">
       <a-input v-model:value="formState.vehicle.nation"/>
     </a-form-item>
-    <a-form-item :name="['vehicle', 'color']" label="color" :rules="[{ required: true }]">
+    <a-form-item :name="['vehicle', 'color']" label="Color" :rules="[{ required: true }]">
       <a-input v-model:value="formState.vehicle.color"/>
     </a-form-item>
-    <a-form-item :name="['vehicle', 'vehicleCode']" label="vehicleCode" :rules="[{required: true }]">
+    <a-form-item :name="['vehicle', 'vehicleCode']" label="Vehicle Code" :rules="[{required: true }]">
       <a-input v-model:value="formState.vehicle.vehicleCode"/>
     </a-form-item>
-    <a-form-item :name="['vehicle', 'amount']" label="amount" :rules="[{  required: true, min: 0}]">
+    <a-form-item :name="['vehicle', 'amount']" label="Amount" :rules="[{  required: true, min: 1}]">
       <a-input v-model:value="formState.vehicle.amount"/>
     </a-form-item>
 
@@ -43,6 +43,7 @@
 <script>
 import {defineComponent, reactive} from 'vue';
 import axios from "axios";
+import router from "@/router/router";
 
 export default defineComponent({
   setup() {
@@ -101,11 +102,10 @@ export default defineComponent({
     addVehicle() {
 
       axios.post('http://localhost:8051/swagger-resources/svehicle/save', this.formState.vehicle)
-          .then(response => {
-            console.log(response);
-            console.log(this.formState.vehicle);
+          .then(
+            router.go("/")
 
-          })
+          )
           .catch(error => {
             console.log(error);
           });
