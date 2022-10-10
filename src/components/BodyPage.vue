@@ -1,5 +1,5 @@
 <template>
-  <a-table sticky :columns="columns" :data-source="data"  :scroll="{ x: 1500 }">
+  <a-table sticky :columns="columns" :data-source="this.data"  :scroll="{ x: 1500 }">
     <template #bodyCell="{ column }">
       <template v-if="column.key === 'operation'"><a>action</a></template>
     </template>
@@ -53,36 +53,17 @@ export default defineComponent({
       fixed: 'right',
       width: 100,
     }]);
-    const data = [];
 
-    for (let i = 0; i < 100; i++) {
-      data.push({
-        key: i,
-        name: `Hi ${i}`,
-        model: (32 + i),
-        price: `${i}`,
-        year: `${i}`,
-        type: `${i}`,
-        nation: `${i}`,
-        amount: `${i}`,
-        createdDate: null,
-        createdUser: null,
-        rn: 0,
-        status: null,
-        updatedDate: null,
-        updatedUser: null
 
-      });
-    }
-    console.log(data)
 
     return {
-      data,
+      data:[],
       columns,
     };
   },
   created() {
     this.getAll();
+    // this.addData();
   },
   methods: {
     getAll() {
@@ -94,6 +75,27 @@ export default defineComponent({
           .catch(error => {
             console.log(error);
           });
+    },
+    addData() {
+      for (let i = 0; i < 100; i++) {
+        this.data.push({
+          key: i,
+          name: `Hi ${i}`,
+          model: (32 + i),
+          price: `${i}`,
+          year: `${i}`,
+          type: `${i}`,
+          nation: `${i}`,
+          amount: `${i}`,
+          createdDate: null,
+          createdUser: null,
+          rn: 0,
+          status: null,
+          updatedDate: null,
+          updatedUser: null
+
+        });
+      }
     },
   }
 
