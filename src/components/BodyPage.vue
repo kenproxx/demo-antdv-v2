@@ -13,13 +13,46 @@
   </a-table>
 
   <a-modal v-model:visible="visible" title="Basic Modal" @ok="handleOk">
-    <p>Some contents...</p>
-    <p>Some contents...</p>
-    <p>Some contents...</p>
+    <a-form
+        :model="formState"
+        v-bind="layout"
+        name="nest-messages"
+        :validate-messages="validateMessages"
+        @finish="onFinish"
+    >
+      <a-form-item :name="['vehicle', 'name']" label="Name" :rules="[{ required: true }]">
+        <a-input v-model:value="formState.vehicle.name"/>
+      </a-form-item>
+      <a-form-item :name="['vehicle', 'model']" label="Model" :rules="[{ required: true  }]">
+        <a-input v-model:value="formState.vehicle.model"/>
+      </a-form-item>
+      <a-form-item :name="['vehicle', 'price']" label="Price" :rules="[{  required: true , min: 1 }]">
+        <a-input v-model:value="formState.vehicle.price"/>
+      </a-form-item>
+      <a-form-item :name="['vehicle', 'year']" label="Year" :rules="[{ required: true , min: 1}]">
+        <a-input v-model:value="formState.vehicle.year"/>
+      </a-form-item>
+      <a-form-item :name="['vehicle', 'type']" label="Type" :rules="[{ required: true }]">
+        <a-input v-model:value="formState.vehicle.type"/>
+      </a-form-item>
+      <a-form-item :name="['vehicle', 'nation']" label="Nation" :rules="[{ required: true }]">
+        <a-input v-model:value="formState.vehicle.nation"/>
+      </a-form-item>
+      <a-form-item :name="['vehicle', 'color']" label="Color" :rules="[{ required: true }]">
+        <a-input v-model:value="formState.vehicle.color"/>
+      </a-form-item>
+      <a-form-item :name="['vehicle', 'vehicleCode']" label="Vehicle Code" :rules="[{required: true }]">
+        <a-input v-model:value="formState.vehicle.vehicleCode"/>
+      </a-form-item>
+      <a-form-item :name="['vehicle', 'amount']" label="Amount" :rules="[{  required: true, min: 1}]">
+        <a-input v-model:value="formState.vehicle.amount"/>
+      </a-form-item>
+    </a-form>
   </a-modal>
+
 </template>
 <script>
-import {defineComponent, ref} from 'vue';
+import {defineComponent, reactive, ref} from 'vue';
 import axios from "axios";
 
 
@@ -68,6 +101,21 @@ export default defineComponent({
       width: 100,
     }]);
 
+    const formState = reactive({
+      vehicle: {
+        id: 1,
+        name: '',
+        model: '',
+        price: '',
+        year: '',
+        type: '',
+        nation: '',
+        color: '',
+        vehicleCode: '',
+        amount: '',
+      }
+    });
+
     const visible = ref(false);
 
     const showModal = () => {
@@ -78,6 +126,28 @@ export default defineComponent({
       console.log(e);
       visible.value = false;
     };
+
+    const onFinish = values => {
+      console.log('Success:', values);
+    };
+    const layout = {
+      labelCol: {
+        span: 8,
+      },
+      wrapperCol: {
+        span: 16,
+      },
+    };
+    const validateMessages = {
+      required: '${label} is required!',
+      types: {
+        email: '${label} is not a valid email!',
+        number: '${label} is not a valid number!',
+      },
+      number: {
+        range: '${label} must be between ${min} and ${max}',
+      },
+    };
     return {
       data: [],
       columns,
@@ -85,7 +155,10 @@ export default defineComponent({
       visible,
       showModal,
       handleOk,
-
+      formState,
+      onFinish,
+      layout,
+      validateMessages,
     };
   },
   created() {
@@ -113,8 +186,8 @@ export default defineComponent({
             console.log(error);
           });
     },
-    enableEdit() {
-      this.isEdit =  !this.isEdit;
+    edit() {
+
     },
   }
 

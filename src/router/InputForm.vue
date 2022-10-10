@@ -66,13 +66,6 @@ export default defineComponent({
       },
     };
     const formState = reactive({
-      user: {
-        name: '',
-        age: undefined,
-        email: '',
-        website: '',
-        introduction: '',
-      },
       vehicle: {
         id: 1,
         name: '',
